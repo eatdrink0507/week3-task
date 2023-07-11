@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = () => {
-  return <div>Header</div>;
+  return <header>facebook / react</header>;
 };
 
 export default Header;
