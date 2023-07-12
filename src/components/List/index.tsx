@@ -1,22 +1,40 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+import { usePageContext } from '../../pagecontext';
+import optimize from '../../optimize.png';
 
-export default function List({ data, open }: Props) {
+export default function List({ data, index }: Props) {
+  const navigate = useNavigate();
+  const { setDetailData } = usePageContext();
+
   return (
-    <div className="div" css={listStyle}>
-      <h3 onClick={() => open(true)}>
-        #{data.number} {data.title}
-      </h3>
-      <span>
-        작성자: {data.user.login}, 작성일: {data.created_at}
-      </span>
-      <span>코멘트: {data.comments}</span>
-    </div>
+    <>
+      <div className="div" css={listStyle}>
+        <h3
+          onClick={() => {
+            setDetailData({ data });
+            navigate('/detail');
+          }}
+        >
+          #{data.number} {data.title}
+        </h3>
+        <span>
+          작성자: {data.user.login}, 작성일: {data.created_at}
+        </span>
+        <span>코멘트: {data.comments}</span>
+      </div>
+      {index % 5 === 4 && (
+        <a href="https://www.wanted.co.kr/">
+          <img src={optimize} alt="Add" />
+        </a>
+      )}
+    </>
   );
 }
 
 type Props = {
-  open: Function;
+  index: number;
   data: {
     number: number;
     title: string;
