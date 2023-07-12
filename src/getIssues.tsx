@@ -6,7 +6,7 @@ export default function getIssues(
   setData: Function,
   setLoading: Function,
 ) {
-  let result = [...data];
+  const result = [...data];
   setLoading(true);
   axios
     .get(`${process.env.REACT_APP_URL}&per_page=10&page=${pagenum}`, {
