@@ -14,6 +14,7 @@ export default function List({ data, index }: Props) {
         <h3
           onClick={() => {
             setDetailData({ data });
+            localStorage.setItem('data', JSON.stringify(data));
             navigate('/detail');
           }}
         >

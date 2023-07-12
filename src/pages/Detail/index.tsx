@@ -4,7 +4,9 @@ import { usePageContext } from '../../pagecontext';
 
 export default function Detail() {
   const { detailData }: any = usePageContext();
-  const data = detailData.data;
+  let data = detailData.data;
+  if (detailData.data === undefined)
+    data = JSON.parse(localStorage.getItem('data') || '{}');
   return (
     <div css={front}>
       <div>
