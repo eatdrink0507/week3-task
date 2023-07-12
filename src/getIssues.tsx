@@ -1,17 +1,22 @@
 import axios from 'axios';
 
 export default function getIssues(
-  per: number,
   pagenum: number,
+  data: Array<any>,
   setData: Function,
+  setLoading: Function,
 ) {
+  let result = [...data];
+  setLoading(true);
   axios
-    .get(`${process.env.REACT_APP_URL}&per_page=${per}&page=${pagenum}`, {
+    .get(`${process.env.REACT_APP_URL}&per_page=10&page=${pagenum}`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
       },
     })
     .then(res => {
-      setData(res.data);
+      result.push(...res.data);
+      setData(result);
+      setLoading(false);
     });
 }
