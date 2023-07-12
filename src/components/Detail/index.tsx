@@ -1,15 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-export default function Detail({ data }: Props) {
+export default function Detail({ data, open }: Props) {
   return (
     <div css={back}>
       <div css={front}>
-        <img src={data.user.avatar_url} alt="icons" />
-        <h3>
-          {data.number} {data.title}
-        </h3>
-        <main>{data.body}</main>
+        <button onClick={() => open(false)}>Close</button>
+        <div>
+          <img width={70} src={data.user.avatar_url} alt="icons" />
+          <h3>
+            #{data.number} {data.title}
+          </h3>
+          <div>{data.body}</div>
+        </div>
       </div>
     </div>
   );
@@ -27,6 +30,7 @@ type Props = {
     comments: number;
     body: string;
   };
+  open: Function;
 };
 
 const back = css`
@@ -43,8 +47,8 @@ const front = css`
   display: flex;
   flex-direction: column;
   z-index: 1;
-  width: 200px;
-  height: 100px;
+  width: 300px;
+  height: 600px;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
@@ -52,4 +56,5 @@ const front = css`
   justify-content: center;
   border: solid 2px black;
   background-color: white;
+  overflow: scroll;
 `;
