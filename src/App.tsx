@@ -1,41 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import List from './components/List';
-import optimize from './optimize.png';
-import Detail from './components/Detail';
-import getIssues from './getIssues';
+import Home from './pages/Home';
+import Detail from './pages/Detail';
+import { PageContext } from './pagecontext';
 
 function App() {
-  const [opendetail, setOpendetail] = useState(false);
-  const [data, setData] = useState([]);
-  const [detailData, setDetailData] = useState(2);
-
-  useEffect(() => {
-    getIssues(7, 1, setData);
-    console.log(data[detailData]);
-  }, []);
+  const [detailData, setDetailData] = useState({});
 
   return (
-    <>
-      <Header />
-      <div>Hello World!</div>
-      <div>
-        {data.map((e, i: number) => {
-          if (i && i % 5 === 4) {
-            return (
-              <div key={i}>
-                <List open={setOpendetail} data={e} />
-                <a href="https://www.wanted.co.kr/">
-                  <img src={optimize} alt="Add" />
-                </a>
-              </div>
-            );
-          }
-          return <List open={setOpendetail} key={i} data={e} />;
-        })}
+    <PageContext.Provider value={{ detailData, setDetailData }}>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detail" element={<Detail />} />
+        </Routes>
       </div>
-      {opendetail && <Detail data={data[detailData]} open={setOpendetail} />}
-    </>
+    </PageContext.Provider>
   );
 }
 
