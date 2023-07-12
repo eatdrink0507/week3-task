@@ -18,7 +18,7 @@ export default function Detail() {
         <span>
           작성일 {data.created_at} 코멘트수 {data.comments}
         </span>
-        <div css={main}>
+        <div>
           <h3>본문</h3>
           {data.body}
         </div>
@@ -33,11 +33,5 @@ const front = css`
 
   padding: 50px;
   justify-content: center;
-  overflow: scroll;
   padding: 50px;
-`;
-
-const main = css`
-  height: 400px;
-  overflow: scroll;
 `;
