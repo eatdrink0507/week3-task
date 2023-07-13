@@ -22,6 +22,7 @@ export default function Home() {
   }, [data]);
 
   useEffect(() => {
+    if (pagenum !== 1 && !data.length) setPagenum(1);
     getIssues(pagenum, data, setData, setLoading);
   }, [pagenum]);
 
